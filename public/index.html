@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <!--
+    Information for Copilot:
+    This website will use w3.css for styling
+    This website requires logging in with Firebase Auth via Google account. 
+    When the user is not logged in, they will be shown a centered login button
+    When the user is logged in, the website will have a nav bar on top; 
+      on the right side, from left to right, there will be the username, currency count and a logout button
+      on the left side, from left to right, there will be a home button and a shop button
+    the home page will have a very large, centered input box for the user to enter a long text, up to 2048 
+  -->
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Welcome to Firebase Hosting</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <script defer src="bundle.js"></script>
+  </head>
+  <body>
+    <div id="root">
+      <div id="loginPage" class="w3-hide">
+        <!--use a small google logo for the button-->
+        <button id="loginButton" class="w3-button w3-blue w3-round-large w3-margin-top w3-margin-bottom w3-center" style="width: 200px; height: 50px;">
+          <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google Logo" style="width: 20px; height: 20px; margin-right: 10px;">
+          Login with Google
+        </button>
+      </div>
+      <div id="mainPage" class="w3-hide">
+        <div id="navbar">
+          <div class="w3-bar w3-blue">
+            <button id="homeButton" class="w3-bar-item w3-button w3-hover-blue w3-round-large w3-margin-left w3-margin-right">Home</button>
+            <button id="shopButton" class="w3-bar-item w3-button w3-hover-blue w3-round-large w3-margin-left w3-margin-right">Shop</button>
+            <div id="user" class="w3-bar-item w3-right">
+              <span id="username" class="w3-margin-right"></span>
+              <span id="currencyCount" class="w3-margin-right">Loading credits</span>
+              <button id="logoutButton" class="w3-button w3-hover-blue w3-round-large w3-margin-right">Logout</button>
+            </div>
+          </div>
+        </div>
+        <div id="homeSubPage">
+          <div class="w3-container w3-center">
+            <div class="w3-card-4 w3-margin-top w3-margin-bottom" style="width: 50%; margin-left: auto; margin-right: auto;">
+              <div class="w3-container w3-blue">
+                <h2>Home</h2>
+              </div>
+              <div id="homeForm" class="w3-container">
+                <!--the form will have a tokenField text in the bottom right under homeInput that will show a tokenCount-->
+                <p>
+                  <label>Enter a long text here:</label>
+                  <textarea id="homeInput" class="w3-input w3-border w3-margin-bottom" rows="10" maxlength="2048"></textarea>
+                </p>
+
+                <!--area for displaying the result; text-->
+                <p>
+                  <label>Result:</label>
+                  <textarea id="homeResult" class="w3-input w3-border w3-margin-bottom" rows="10" readonly></textarea>
+                </p>
+                <p>
+                  <label>Token Count:</label>
+                  <span id="tokenField" class="w3-margin-bottom"></span>
+                <p>
+                  <button id="homeSubmit" class="w3-button w3-blue w3-round-large">Submit</button>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="shopSubPage">
+          <!--
+            centered button that says DEBUG: Add 1000 tokens
+          -->
+          <div class="w3-container w3-center">
+            <button id="debugAddTokens" class="w3-button w3-blue w3-round-large w3-margin-top w3-margin-bottom">DEBUG: Add 1000 tokens</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
