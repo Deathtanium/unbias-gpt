@@ -20,6 +20,9 @@ const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const db = getFirestore(app);
 const auth = getAuth(app);
+
+//connect to local emulator
+connectFunctionsEmulator(getFunctions(app, 'europe-west1'), 'localhost', 5001);
 const func = getFunctions(app, 'europe-west1');
 
 var subPagesList = ['homeSubPage', 'shopSubPage']
@@ -141,5 +144,20 @@ document.getElementById('debugAddTokens').addEventListener('click', () => {
   var get_balance = httpsCallable(func, 'get_balance')
   get_balance().then((result) => {
     document.getElementById('currencyCount').innerHTML = result.data + ' credits';
+  });
+});
+
+//shop stuff
+//call the cloud function to get the stealth address, convert it to a QR code (qrcode npm package) and display it
+document.getElementById('shopButton').addEventListener('click', () => {
+  console.log('shop button clicked')
+  var getStealthKey = httpsCallable(func, 'get_stealth_key');
+  getStealthKey().then((result) => {
+    var qrcode = require('qrcode');
+    console.log(result)
+    qrcode.toCanvas(document.getElementById('qrCanvas'), result.data.result, function (error) {
+      if (error) console.error(error)
+    })
+    document.getElementById('moneroAddress').innerHTML = result.data.result;
   });
 });

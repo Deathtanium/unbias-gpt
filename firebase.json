@@ -17,6 +17,17 @@
         "firebase-debug.log",
         "firebase-debug.*.log"
       ]
+    },
+    {
+      "source": "functions_js",
+      "codebase": "functions_js",
+      "ignore": [
+        "node_modules",
+        ".git",
+        "firebase-debug.log",
+        "firebase-debug.*.log"
+      ],
+      "maxInstances": 10
     }
   ],
   "firestore": {

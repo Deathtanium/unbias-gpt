@@ -68,11 +68,44 @@
         </div>
         <div id="shopSubPage">
           <!--
+            A node canvas that will display a Qr code that will be used to buy tokens
+            only display the image and the monero logo
+          -->
+          <div class="w3-container w3-center">
+            <div class="w3-card-4 w3-margin-top w3-margin-bottom" style="width: 50%; margin-left: auto; margin-right: auto;">
+              <div class="w3-container w3-blue">
+                <h2>Shop</h2>
+              </div>
+              
+              <div id="shopForm" class="">
+                <!--stack these vertically-->
+                <p 
+                  class="w3-margin-bottom"
+                  style="display: flex; flex-direction: column; justify-content: center; align-items: center;"
+                >
+                  <label>Scan this QR code to buy tokens:</label>
+                  <canvas id="qrCanvas" class="w3-margin-bottom" style="margin:auto"></canvas>
+                </p>
+                <p>
+                  <label>Monero Address:</label>
+                  <!--make this text break if it's too long-->
+                  <span id="moneroAddress" class="w3-margin-bottom" style="overflow-wrap:break-word"></span>
+                </p>
+              </div>
+            </div>
+          </div>
+
+
+
+
+          <!--
             centered button that says DEBUG: Add 1000 tokens
           -->
           <div class="w3-container w3-center">
             <button id="debugAddTokens" class="w3-button w3-blue w3-round-large w3-margin-top w3-margin-bottom">DEBUG: Add 1000 tokens</button>
           </div>
+
+
 
         </div>
       </div>
