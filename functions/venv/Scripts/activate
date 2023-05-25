@@ -38,7 +38,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="C:\Users\serbanstein\Desktop\AI-cloudproj\unbias-gpt-web\functions\venv"
+VIRTUAL_ENV="C:\Users\lock\Desktop\Facultate\unbias-gpt\functions\venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

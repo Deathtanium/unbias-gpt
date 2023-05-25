@@ -1,4 +1,4 @@
-#!C:\Users\serbanstein\Desktop\AI-cloudproj\unbias-gpt-web\functions\venv\Scripts\python.exe
+#!C:\Users\lock\Desktop\Facultate\unbias-gpt\functions\venv\Scripts\python.exe
 # -*- coding: utf-8 -*-
 # Copyright 2022 Google LLC
 #

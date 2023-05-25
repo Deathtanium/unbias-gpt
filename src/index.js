@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { getFirestore } from 'firebase/firestore';
+import { getFirestore, collection, onSnapshot, query, where } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 import { getFunctions, connectFunctionsEmulator,httpsCallable } from 'firebase/functions';
 
@@ -25,7 +25,7 @@ const auth = getAuth(app);
 connectFunctionsEmulator(getFunctions(app, 'europe-west1'), 'localhost', 5001);
 const func = getFunctions(app, 'europe-west1');
 
-var subPagesList = ['homeSubPage', 'shopSubPage']
+var subPagesList = ['homeSubPage', 'shopSubPage', 'historySubPage']
 var currentPage = 'homeSubPage';
 
 //AUTH STATE HANDLING
@@ -161,3 +161,37 @@ document.getElementById('shopButton').addEventListener('click', () => {
     document.getElementById('moneroAddress').innerHTML = result.data.result;
   });
 });
+
+
+document.getElementById('historyButton').addEventListener('click', () => {
+  var historyContainer = document.getElementById('historySubPage');
+  historyContainer.innerHTML = '';
+
+  var currentUserID = auth.currentUser.uid;
+
+  const q = query(collection(db, 'userTexts'), where('userID', '==', currentUserID));
+
+  onSnapshot(q, (snapshot) => {
+    snapshot.docs.forEach(doc => {
+      var data = doc.data();
+      var historyEntry = document.createElement('div');
+      historyEntry.className = "w3-panel w3-card";
+      var userText = document.createElement('p');
+      userText.className = "w3-text-teal";
+      userText.textContent = 'User: ' + data.text;
+      var responseText = document.createElement('p');
+      responseText.className = "w3-text-grey";
+      responseText.textContent = 'Response: ' + data.response;
+      var timestampText = document.createElement('p');
+      timestampText.className = "w3-text-grey w3-small";
+      var timestampDate = new Date(data.timestamp.toMillis());
+      timestampText.textContent = 'Time: ' + timestampDate.toLocaleString();
+      historyEntry.appendChild(userText);
+      historyEntry.appendChild(responseText);
+      historyEntry.appendChild(timestampText);
+      historyContainer.appendChild(historyEntry);
+    });
+  });
+});
+
+

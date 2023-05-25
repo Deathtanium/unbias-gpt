@@ -54,7 +54,25 @@ def eval_text(req: https_fn.CallableRequest) -> https_fn.Response:
     presence_penalty=0.6,
     stop=["->"]
   )
-  res_text = response["choices"][0]["text"]
+  res_text = response["choices"][0]["text"].strip()
+  user_text_ref = db.collection('userTexts')
+
+  if res_text == "0":
+    restext = "This looks like a left-leaning prompt."
+  elif res_text == "1":
+      restext = "This looks like a centrist prompt."
+  elif res_text == "2":
+      restext = "This looks like a right-leaning prompt."
+  else:
+      restext = "Error: " + res_text
+  # Store user text and model response in Firestore
+  user_text_ref.add({
+      'userID': req.auth.uid,
+      'text': req.data["text"],
+      'response': restext,
+      'timestamp': firestore.SERVER_TIMESTAMP
+  })
+
   return res_text
 
 @https_fn.on_call(region="europe-west1",max_instances=8)
