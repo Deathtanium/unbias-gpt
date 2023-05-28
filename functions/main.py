@@ -26,6 +26,7 @@ def count_tokens(req: https_fn.CallableRequest) -> https_fn.Response:
 #authenticated function that sends a text to the Ada model and returns the result
 @https_fn.on_call(region="europe-west1",max_instances=8)
 def eval_text(req: https_fn.CallableRequest) -> https_fn.Response:
+  openai.api_key = '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'
   if req.auth.uid is None:
     return https_fn.Response("Not authenticated", status=401)
   prompt = req.data["text"] + " ->"
